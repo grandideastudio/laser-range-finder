@@ -1,0 +1,23 @@
+┌─────────────────────────────────────────────────┐
+│ Parallax Laser Range Finder                     │
+│                                                 │
+│ Author: Joe Grand                               │                     
+│ Copyright (c) 2011 Grand Idea Studio, Inc.      │
+│ Web: http://www.grandideastudio.com             │
+│ Technical Support: support@parallax.com         │ 
+│                                                 │
+│ Distributed under a Creative Commons            │
+│ Attribution 3.0 United States license           │
+│ http://creativecommons.org/licenses/by/3.0/us/  │
+└─────────────────────────────────────────────────┘
+
+Program Description:
+
+This design uses an Omnivision OVM7690 640x480 CMOS CameraCube module, a laser diode, 
+and a Parallax Propeller microcontroller to create a low-cost laser range finder.
+Distance to a targeted object is calculated using triangulation by simple trigonometry 
+between the centroid of laser light, camera, and object. 
+
+Refer to the project page for more details:
+
+http://www.grandideastudio.com/portfolio/laser-range-finder/
