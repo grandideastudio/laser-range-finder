@@ -2,7 +2,7 @@
 
 '' Copyright (c) 2008 Parallax & Michael Green
 ''     See end of file for terms of use.
-
+                 
 '' This is a minimal version of an I2C driver in SPIN.  It assumes
 '' that the SDA pin is one higher than the SCL pin.  It assumes that
 '' neither the SDA nor the SCL pins have pullups, so drives both.
@@ -69,6 +69,9 @@
 '' within a multiple of the page size).  The WriteWait waits for the
 '' write operation to complete.  Alternatively, you could wait for 5ms
 '' since currently produced EEPROMs will finish within that time.
+
+'' Modified by Joe Grand for use with LRF_OVM7690 (May 31, 2011):
+'' * Commented out unused methods to save space
 
 CON
    ACK      = 0                        ' I2C Acknowledge

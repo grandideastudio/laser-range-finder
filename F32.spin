@@ -12,6 +12,9 @@
         |              a single cog, and speed-up the routines where possible.     |
         +--------------------------------------------------------------------------+
 
+        '' Modified by Joe Grand for use with LRF_OVM7690 (August 19, 2015):
+        '' * Commented out unused methods to save space
+
         Features:
 
         * prop resources:       1 cog, 654 longs        (BST can remove unused Spin code, and the odds are
@@ -779,7 +782,7 @@ _FTruncRound_ret        ret
 ' truncation to unsigned integer
 ' fnumA = unsigned int(fnumA), clamped to 0
 '------------------------------------------------------------------------------
-_UintTrunc              call    #_Unpack
+{_UintTrunc              call    #_Unpack
                         mov     fnumA, #0
                         test    flagA, #SignFlag wc
               if_c_or_z jmp     #_UintTrunc_ret         ' if the input number was negative or zero, we're done
@@ -856,7 +859,7 @@ _FCmp                   mov     t1, fnumA               ' compare signs
           if_c          neg     fnumA, fnumA            ' if fnumA < fnumB, t1 = -1
           if_z          mov     fnumA, #0               ' if fnumA = fnumB, t1 = 0
 _FCmp_ret               ret
-
+}
 
 '------------------------------------------------------------------------------
 ' new table lookup code
@@ -957,7 +960,7 @@ _Tan                    call    #_Sin
                         call    #_FDiv                  ' divide
 _Tan_ret                ret
 
-
+{
 '------------------------------------------------------------------------------
 ' log2
 ' fnumA = log2(fnumA)
@@ -1109,7 +1112,7 @@ _Frac                   call    #_Unpack                ' get fraction
                         andn    fnumA, Bit31
 _Frac_ret               ret
 
-
+}
 '------------------------------------------------------------------------------
 ' input:   fnumA        32-bit floating point value
 '          fnumB        32-bit floating point value 
@@ -1221,7 +1224,7 @@ _Pack                   cmp     manA, #0 wz             ' check for zero
                         or      fnumA, flagA            ' bit 31 sign            
 _Pack_ret               ret
 
-
+{
 '------------------------------------------------------------------------------
 ' modulo
 ' fnumA = fnumA mod fnumB
@@ -1242,7 +1245,7 @@ _FMod                   mov     t4, fnumA               ' save fnumA
           if_nz         or      fnumA, Bit31
 _FMod_ret               ret
 
-
+}
 '------------------------------------------------------------------------------
 ' arctan2
 ' fnumA = atan2( fnumA, fnumB )
@@ -1299,7 +1302,7 @@ CORDIC_Angles           long $c90fdaa, $76b19c1, $3eb6ebf, $1fd5ba9, $ffaadd
                         long $100, $80, $40, $20, $10
                         'long $8, $4, $2, $1
 
-
+{
 '------------------------------------------------------------------------------
 ' arcsine or arccosine
 ' fnumA = asin or acos(fnumA)
@@ -1359,10 +1362,10 @@ floor2                  call    #_Unpack                ' unpack variable
           if_nz         add     t5, t6                  ' if non-zero, then adjust
 
 :exit                   mov     fnumA, t5               ' convert integer to float 
-                        call    #_FFloat                '}                
+                        call    #_FFloat                '                
 _Ceil_ret
 _Floor_ret              ret
-
+}
 
 '-------------------- constant values -----------------------------------------
 
@@ -1413,21 +1416,21 @@ cmdFMul                 call    #_FMul
 cmdFDiv                 call    #_FDiv
 cmdFFloat               call    #_FFloat
 cmdFTruncRound          call    #_FTruncRound
-cmdUintTrunc            call    #_UintTrunc
-cmdFSqr                 call    #_FSqr
-cmdFCmp                 call    #_FCmp
-cmdFSin                 call    #_Sin
-cmdFCos                 call    #_Cos
+'cmdUintTrunc            call    #_UintTrunc
+'cmdFSqr                 call    #_FSqr
+'cmdFCmp                 call    #_FCmp
+'cmdFSin                 call    #_Sin
+'cmdFCos                 call    #_Cos
 cmdFTan                 call    #_Tan
-cmdFLog2                call    #_Log2
-cmdFExp2                call    #_Exp2
-cmdFPow                 call    #_Pow
-cmdFFrac                call    #_Frac
-cmdFMod                 call    #_FMod
-cmdASinCos              call    #_ASinCos
+'cmdFLog2                call    #_Log2
+'cmdFExp2                call    #_Exp2
+'cmdFPow                 call    #_Pow
+'cmdFFrac                call    #_Frac
+'cmdFMod                 call    #_FMod
+'cmdASinCos              call    #_ASinCos
 cmdATan2                call    #_ATan2
-cmdCeil                 call    #_Ceil
-cmdFloor                call    #_Floor
+'cmdCeil                 call    #_Ceil
+'cmdFloor                call    #_Floor
 
 {{
 
